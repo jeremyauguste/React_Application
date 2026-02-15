@@ -4,11 +4,11 @@ import { useState, useCallback } from "react"
  * unordered list.
  * @returns Component
  */
-export default function Sidebar(props) {
+export default function Sidebar({initialMenuItems}) {
   let [newMenuItem, setNewMenuItem] = useState("")
   // TODO: 2 Using a state hook, maintain the current menu items as an array state.
   // let [menuItems, setMenuItems] = useState(initialMenuItems)
-  let [menuItems, setMenuItems] = useState (props)
+  let [menuItems, setMenuItems] = useState(initialMenuItems)
 
   let [filter, setFilter] = useState("")
   // Adds a single string passed in as parameter to the state element
@@ -18,7 +18,10 @@ export default function Sidebar(props) {
     //   // TODO: 3. Add a new menu item to the correct variable associated with this class.
     //   // This involves adding a parameter and changing a class instance variable (props).
     //   setMenuItems([item, ...menuItems])
-  }, [])
+    console.log(menuItems)
+    console.log(newMenuItem)
+    setMenuItems((m)=>[...m, newMenuItem])
+  }, [newMenuItem])
 
   // TODO: 4. Display ONLY the menu items that contain the filter element value
   // "term" in them. Each menu item should be an unordered list item wrapped in an unordered list (ul) element.
@@ -29,7 +32,7 @@ export default function Sidebar(props) {
   return (
     <div>
       <ul>
-        {props.initialMenuItems.map((item) => (
+        {menuItems.map((item) => (
           <li>{item}</li>
         ))}
       </ul>
@@ -43,6 +46,7 @@ export default function Sidebar(props) {
       <button
         onClick={() => {
           /* TODO: 3 */
+          addMenuItem()
         }}
       >
         Add Item

@@ -32,7 +32,7 @@ export default function Sidebar({initialMenuItems}) {
   return (
     <div>
       <ul>
-        {menuItems.map((item) => (
+        {menuItems.map((item) => filter?(item.toLowerCase().match(filter.toLowerCase())?<li>{item}</li>:null) :(
           <li>{item}</li>
         ))}
       </ul>
